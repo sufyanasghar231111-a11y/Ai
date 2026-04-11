@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { provideContext } from '../other/AuthProvider'
-import { RiAddLargeFill, RiAddLargeLine } from "@remixicon/react";
+import { RiAddLargeFill, RiAddLargeLine, RiUserLine } from "@remixicon/react";
 import { Link } from 'react-router-dom';
 
 function Logout({user}) {
-    let {logOut, setLogOut,handleLogOut,handleDelete}=useContext(provideContext)
+    let {logOut, setLogOut,hideContent, setHideContent}=useContext(provideContext)
     let [hide, setHide]=useState(false)
-// localStorage.clear()
   return (
     <div className='  relative'>
       <div onClick={()=>{setHide(false)}} className='inset-0 absolute '>  
@@ -41,9 +40,11 @@ function Logout({user}) {
               </div>
               <div className='border-b border-neutral-500 mx-3'>
               </div>
-              <div className='py-4 max-sm:py-3 mx-4 max-sm:mx-2 flex items-center gap-3'>
-                <div className=' rounded-full w-7 h-7 overflow-hidden'>
-                  <img className='w-full h-full object-cover' src={user?.profilePic} alt="" />
+              <div onClick={()=>{setHideContent(true)
+                setHide(false)
+              }} className='py-3 cursor-pointer hover:bg-gray-500 rounded-lg transition-all duration-100 lg:px-2  lg:my-2 max-sm:py-3 mx-2 max-sm:mx-1 flex items-center gap-3'>
+                <div  className=' border rounded-full flex items-center justify-center w-7 h-7 overflow-hidden'>
+                  <RiUserLine className='w-4 h-4' />
                 </div>
                 <h1 className='max-sm:text-sm'>Profile</h1>
               </div>

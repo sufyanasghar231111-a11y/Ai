@@ -61,7 +61,7 @@ function ChatUi({ user }) {
                 return <div key={index} className={`flex  ${elem.sender === 'user' ? 'justify-end  ' : 'justify-start py-5  '}  items-start  `}>
                   {
                     elem.message && (
-                      <h1 className={`rounded-lg px-4 py-2 text-sm sm:text-base max-w-[80%] break-words  ${elem.sender === 'user' ? 'bg-white/10' : 'bg-green-500'} `}>
+                      <h1 className={`rounded-lg px-2 text-start py-2 text-sm sm:text-base max-w-[80%] break-words  ${elem.sender === 'user' ? 'bg-white/10' : 'bg-green-500'} `}>
                         {elem.message}
                       </h1>
                     )

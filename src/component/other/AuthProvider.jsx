@@ -3,13 +3,13 @@ import { getLocal, setLocal, users } from './LoginData'
 
 export const provideContext = createContext()
 function AuthProvider({ children }) {
-  // localStorage.clear()
   let [userInput, setUserInput] = useState([])
 
   let [user, setUser] = useState(() => {
     let store = localStorage.getItem('logInUser')
     return store ? JSON.parse(store) : null
   })
+  
   let [save, setSave] = useState([])
   let [log, setLog] = useState(false)
   let [chat, setChat] = useState('')
@@ -33,8 +33,12 @@ function AuthProvider({ children }) {
   let [signpass, setSignpass] = useState(false)
   let [signemail, setSignemail] = useState(false)
   let [name, setName] = useState(false)
+  let [edit,setEdit]=useState({
+    editname:user?.name,
+    edituser:user?.email
+  })
   useEffect(() => {
-    setLocal();
+    // setLocal();
     let { localData } = getLocal()
     setUserInput(localData)
   }, [])
@@ -43,6 +47,9 @@ function AuthProvider({ children }) {
     email: '',
     password: ""
   })
+  let [hideContent, setHideContent]=useState(false)
+  let [delay, setDelay]=useState(false)
+  let [loginDelay, setLoginDelay]=useState(false)
   function handleForm(e) {
     e.preventDefault();
     let newUser = {
@@ -52,23 +59,32 @@ function AuthProvider({ children }) {
       profilePic: "https://randomuser.me/api/portraits/men/1.jpg"
     }
     setSave([...save, newUser])
-    if (input.name && input.email && input.password) {
-      setUser(newUser);
-    }
-    setLog(true)
-    setInput({
+    setTimeout(() => {
+      
+      if (input.name && input.email && input.password) {
+        setUser(newUser);
+      }
+      setDelay(false)
+      setInput({
       name: '',
       email: '',
       password: ''
     })
+    }, 1500);
+    setDelay(true)
+    setLog(true)
+    
     if (!input.name) {
       setName(true)
+      setDelay(false)
     }
     if (!input.email) {
       setSignemail(true)
+      setDelay(false)
     }
     if (!input.password) {
       setSignpass(true)
+      setDelay(false)
     }
       setUserInput(prev =>[...prev,newUser])
       let storeUser=JSON.parse(localStorage.getItem('users')) || []
@@ -91,12 +107,15 @@ function AuthProvider({ children }) {
     }
   }
   function handleLogOut() {
-    localStorage.removeItem('logInUser')
-    localStorage.removeItem('content')
-    localStorage.removeItem('hide')
-    
-    setUser(null)
-    setLogOut(false)
+    setTimeout(() => {
+      localStorage.removeItem('logInUser')
+      localStorage.removeItem('content')
+      localStorage.removeItem('hide')
+      setUser(null)
+      setLogOut(false)
+      setDelay(false)
+    }, 1500);
+    setDelay(true)
   }
   function getBotMessage(chat) {
   const message = chat.toLowerCase().trim();
@@ -253,8 +272,54 @@ else if (message.includes("can you help with web development")) {
     ])
     setHide(true)
   }
+  function handleEdit(e){
+    e.preventDefault();
+    if(edit.editname && edit.edituser){
+      setTimeout(() => {  
+      setHideContent(false)
+        setUser((prev) =>({
+          ...prev,
+          name:edit.editname,
+          email:edit.edituser
+        }))
+      }, 1500);
+      setTimeout(()=>{
+        setDelay(false)
+
+      },1500)
+      setDelay(true)
+    }
+    
+   setEdit({
+    editname:edit.editname,
+    edituser:edit.edituser
+   })
+  }
+      useEffect(()=>{
+      localStorage.setItem('logInUser',JSON.stringify(user))
+    },[user])
+    useEffect(()=>{
+      if(user){
+        setEdit({
+          editname:user?.name,
+          edituser:user?.email
+        })
+      }else{
+        setEdit({
+          editname:'',
+          edituser:''
+        })
+
+      }
+    },[user])
+  function handleChangeEdit(e){
+    setEdit({
+      ...edit,
+      [e.target.name]:e.target.value
+    })
+  }
   return (
-    <provideContext.Provider value={{ userInput, setUserInput, input, setInput, handleForm, handleChange, log, setLog, save, setSave, logOut, setLogOut, handleLogOut, user, setUser, handleChatSubmit, chat, setChat, content, setContent, hide, setHide, typing, setTyping, handleDelete, erroremail, setErroremail, errorpass, setErrorpass, name, setName, signemail, setSignemail, signpass, setSignpass }}>
+    <provideContext.Provider value={{ userInput, setUserInput, input, setInput, handleForm, handleChange, log, setLog, save, setSave, logOut, setLogOut, handleLogOut, user, setUser, handleChatSubmit, chat, setChat, content, setContent, hide, setHide, typing, setTyping, handleDelete, erroremail, setErroremail, errorpass, setErrorpass, name, setName, signemail, setSignemail, signpass, setSignpass,hideContent, setHideContent,handleEdit,edit,setEdit,handleChangeEdit,delay, setDelay,loginDelay, setLoginDelay }}>
       {children}
     </provideContext.Provider>
   )

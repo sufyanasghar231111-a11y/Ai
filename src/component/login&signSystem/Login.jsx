@@ -1,22 +1,29 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { provideContext } from '../other/AuthProvider'
+import { RiLoader4Line } from '@remixicon/react'
 
 function Login({handleData}) {
-  let {erroremail, setErroremail,errorpass,setErrorpass}=useContext(provideContext)
+  let {erroremail, setErroremail,errorpass,setErrorpass,loginDelay, setLoginDelay}=useContext(provideContext)
   let [email, setEmail]=useState('')
   let [password, setPassword]=useState('')
 
   function handleLoginForm(e){
     e.preventDefault();
-    handleData(email,password)
-    setEmail('')
-    setPassword('')
+    setTimeout(() => {
+      setLoginDelay(false)
+      handleData(email,password)
+      setEmail('')
+      setPassword('')
+    }, 1500);
+    setLoginDelay(true)
     if(!email){
       setErroremail(true)
+      setLoginDelay(false)
     }
     if(!password){
       setErrorpass(true)
+      setLoginDelay(false)
     }
   }
   return (
@@ -49,15 +56,19 @@ function Login({handleData}) {
               errorpass &&(
                 <h1 className='text-red-400'>required:</h1>
               )
-            }
-            
+            } 
           <Link to='/forgetpassword' className='text-sm pt-1 hover:underline'>Forget Password ?</Link>
-
           </div>
           <div className='w-full pt-3'>
-            <button className='bg-[#2F2F2F] rounded-lg border-white max-sm:text-sm border w-full py-1 font-semibold cursor-pointer'>
+            {
+              loginDelay ? ( <button   className='bg-[#2F2F2F] rounded-lg border-white max-sm:text-sm border w-full py-1 cursor-not-allowed opacity-70 font-semibold '>
+              <RiLoader4Line className='w-full rotate' />
+            </button>)
+              :
+              ( <button className='bg-[#2F2F2F] rounded-lg border-white max-sm:text-sm border w-full py-1 font-semibold cursor-pointer'>
               Login
-            </button>
+            </button>)
+            } 
           </div>
           <div className='py-10 max-sm:text-sm'>
             <h1>Are You New Member ? 

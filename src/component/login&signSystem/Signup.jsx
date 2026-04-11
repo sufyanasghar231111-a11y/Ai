@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Ai from '../ChatSystem/Ai'
 import { provideContext } from '../other/AuthProvider'
+import { RiLoader4Line } from '@remixicon/react'
 function Signup() {
- let {input,handleForm,handleChange,user,signemail, setSignemail,signpass, setSignpass,name,setName}=useContext(provideContext)
+ let {input,handleForm,handleChange,user,signemail,signpass,name,delay}=useContext(provideContext)
 
  useEffect(()=>{
     localStorage.setItem('logInUser', JSON.stringify(user))
@@ -50,9 +51,18 @@ function Signup() {
             }
           </div>
           <div className='w-full pt-5'>
-            <button className='bg-[#2F2F2F] rounded-lg border-white border max-sm:text-sm w-full py-1.5 font-semibold cursor-pointer'>
-              Login
+            {
+              delay ?(
+                 <button className='bg-[#2F2F2F] rounded-lg border-white border max-sm:text-sm w-full py-1.5 font-semibold cursor-not-allowed opacity-70'>
+              <RiLoader4Line className=' rotate w-full' />
             </button>
+              ):(
+                 <button className='bg-[#2F2F2F] rounded-lg border-white border max-sm:text-sm w-full py-1.5 font-semibold cursor-pointer'>
+              Signin
+            </button>
+              )
+            }
+           
           </div>
           <div className='py-10 max-sm:text-sm'>
             <h1>Already have an account ? <Link to='/' className='text-blue-400 font-semibold cursor-pointer' >
