@@ -9,6 +9,7 @@ function Signup() {
  useEffect(()=>{
     localStorage.setItem('logInUser', JSON.stringify(user))
  },[user])
+  // localStorage.clear()
   return (
     <div>
       <div className={`w-full min-h-screen  ${user? 'pt-0':'pt-8'} max-sm:py-2 bg-[#212121]`}>

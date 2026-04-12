@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { provideContext } from '../other/AuthProvider'
-import { RiAddLargeFill, RiAddLargeLine, RiUserLine } from "@remixicon/react";
+import { RiAddLargeFill, RiAddLargeLine, RiLoader4Line, RiUserLine } from "@remixicon/react";
 import { Link } from 'react-router-dom';
 
 function Logout({user}) {
-    let {logOut, setLogOut,hideContent, setHideContent}=useContext(provideContext)
+    let {logOut, setLogOut,hideContent, setHideContent,handleLogOut, handleDelete,delay, setDelay}=useContext(provideContext)
     let [hide, setHide]=useState(false)
+    
   return (
     <div className='  relative'>
       <div onClick={()=>{setHide(false)}} className='inset-0 absolute '>  
@@ -34,9 +35,25 @@ function Logout({user}) {
                   <RiAddLargeFill className='w-4 max-sm:w-3 h-4  max-sm:h-3' />
                 </div>  
               </div>
-              <div className='flex items-center hover:bg-gray-500 transition-all duration-100 px-4 max-sm:px-1 rounded-lg mt-3 pt-3 gap-3  mb-3 pb-2'>   
-                <RiAddLargeLine className='w-5 h-5 max-sm:w-3 max-sm:h-3' />
-                <Link to='/' className='max-sm:text-sm'>Add another account</Link>
+              <div onClick={()=>{handleLogOut()
+          handleDelete()
+        }}className='flex items-center hover:bg-gray-500 transition-all duration-100 px-4 max-sm:px-1 rounded-lg mt-3 pt-3 gap-3  mb-3 pb-2'> 
+        {delay ?
+        (
+          <div className='flex items-center justify-center w-full'>
+           <RiLoader4Line className='  rotate w-full' />
+          </div>
+        ):
+         (
+          <>
+          
+          <RiAddLargeLine className='w-5 h-5 max-sm:w-3 max-sm:h-3' />
+          <div  className='max-sm:text-sm'>Add another account</div>
+          </>
+        )
+        
+        }  
+
               </div>
               <div className='border-b border-neutral-500 mx-3'>
               </div>

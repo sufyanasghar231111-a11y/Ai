@@ -88,8 +88,8 @@ function ChatUi({ user }) {
           <form onSubmit={handleChatSubmit} className='w-full max-sm:text-sm'>
             <input value={chat} onChange={(elem) => { setChat(elem.target.value) }} type="text" className='w-full outline-0' placeholder='Ask whatever you want' />
           </form>
-          <div onClick={handleChatSubmit} className={` rounded-full cursor-pointer ${chat === '' ? 'bg-white/10 rotate-0 px-4 max-sm:px-3  py-1.5 max-sm:py-1' : 'bg-white px-2 py-2 max-sm:py-1 max-sm:px-1 -rotate-90 '}`}>
-            <RiArrowRightLongLine className={`w-4 h-4  max-sm:w-3 max-sm:h-3 ${chat === ''?"text-white":'text-black'}`} />
+          <div onClick={handleChatSubmit} className={` rounded-full  ${chat === '' ? 'bg-white/10 rotate-0 px-4 max-sm:px-3  py-1.5 max-sm:py-1 cursor-not-allowed' : 'bg-white px-2 py-2 max-sm:py-1 max-sm:px-1 -rotate-90 cursor-pointer '}`}>
+            <RiArrowRightLongLine className={`w-4 h-4  max-sm:w-3 max-sm:h-3 ${chat === ''?"text-white":'text-black '}`} />
           </div>
         </div>
         <div className='px-4 max-sm:px-2  max-sm:text-[10px] py-1 cursor-pointer rounded-full bg-red-500' onClick={() => { handleDelete() }}>

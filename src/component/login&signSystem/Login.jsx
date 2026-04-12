@@ -7,6 +7,7 @@ function Login({handleData}) {
   let {erroremail, setErroremail,errorpass,setErrorpass,loginDelay, setLoginDelay,wrong,setWrong}=useContext(provideContext)
   let [email, setEmail]=useState('')
   let [password, setPassword]=useState('')
+ 
 
   function handleLoginForm(e){
     e.preventDefault();
@@ -28,7 +29,7 @@ function Login({handleData}) {
       setLoginDelay(false)
     }
   }
-  
+
   return (
     <div className='w-full min-h-screen  pt-16 max-sm:py-6  bg-[#212121]'>
       <div className='w-full h-full flex items-center justify-center'>
@@ -75,7 +76,7 @@ function Login({handleData}) {
               <RiLoader4Line className='w-full rotate' />
             </button>)
               :
-              ( <button className='bg-[#2F2F2F] rounded-lg border-white max-sm:text-sm border w-full py-1 font-semibold cursor-pointer'>
+              ( <button  className={`bg-[#2F2F2F] rounded-lg border-white max-sm:text-sm border  w-full py-1 font-semibold cursor-pointer`}>
               Login
             </button>)
             } 

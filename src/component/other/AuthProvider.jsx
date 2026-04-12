@@ -87,7 +87,7 @@ function AuthProvider({ children }) {
       setSignpass(true)
       setDelay(false)
     }
-      setUserInput(prev =>[...prev,newUser])
+      setUserInput(prev =>[...(prev || []),newUser])
       let storeUser=JSON.parse(localStorage.getItem('users')) || []
       storeUser.push(newUser)
       localStorage.setItem('users',JSON.stringify(storeUser))
