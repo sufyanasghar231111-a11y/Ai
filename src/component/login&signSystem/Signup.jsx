@@ -11,7 +11,7 @@ function Signup() {
  },[user])
   return (
     <div>
-      <div className={`w-full min-h-screen  ${user? 'pt-0':'pt-12'} max-sm:py-2 bg-[#212121]`}>
+      <div className={`w-full min-h-screen  ${user? 'pt-0':'pt-8'} max-sm:py-2 bg-[#212121]`}>
     {
       user ? <Ai user={user}   />
       :
@@ -28,27 +28,32 @@ function Signup() {
             <input  value={input.name} name='name' onChange={handleChange}  type="text" placeholder='Enter Your full name' className={`w-full border    rounded-lg ${name ? 'border-red-500 text-red-400':'border'}  py-1.5 outline-0 max-sm:text-sm px-3`} />
               {
               name &&(
-                <h1 className='text-red-400'>required:</h1>
+                <h1 className='text-red-400 text-sm'>Name is required.</h1>
               )
             }
           </div>
-          <div className='w-full pt-4'>
+          <div className='w-full pt-3'>
             <h1 className='text-sm mb-1'>Email Address</h1>
             <input  value={input.email} name='email' onChange={handleChange}  type="email" placeholder='Enter Your email' className={`w-full border    rounded-lg ${signemail ? 'border-red-500 text-red-400':'border'}  py-1.5 max-sm:text-sm outline-0 px-3`} />
              {
               signemail &&(
-                <h1 className='text-red-400'>required:</h1>
+                <h1 className='text-red-400 text-sm'>Email is required.</h1>
               )
             }
           </div>
-          <div className='w-full pt-4'>
+          <div className='w-full pt-3'>
             <h1 className='text-sm mb-1'>Password</h1>
             <input  value={input.password} name='password' onChange={handleChange}  type="text" placeholder='Enter Your password' className={`w-full border    rounded-lg ${signpass ? 'border-red-500 text-red-400':'border'}  py-1.5 max-sm:text-sm outline-0 px-3`} />
              {
               signpass &&(
-                <h1 className='text-red-400'>required:</h1>
+                <h1 className='text-red-400 text-sm'>Password is required.</h1>
               )
             }
+            {
+              input.password.length>1 && input.password.length <8  &&(
+                <h1 className='text-red-400 text-sm' >Password must be at least 8 characters.</h1>
+              )
+            } 
           </div>
           <div className='w-full pt-5'>
             {
@@ -62,7 +67,6 @@ function Signup() {
             </button>
               )
             }
-           
           </div>
           <div className='py-10 max-sm:text-sm'>
             <h1>Already have an account ? <Link to='/' className='text-blue-400 font-semibold cursor-pointer' >

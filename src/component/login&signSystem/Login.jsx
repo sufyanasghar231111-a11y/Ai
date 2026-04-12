@@ -4,7 +4,7 @@ import { provideContext } from '../other/AuthProvider'
 import { RiLoader4Line } from '@remixicon/react'
 
 function Login({handleData}) {
-  let {erroremail, setErroremail,errorpass,setErrorpass,loginDelay, setLoginDelay}=useContext(provideContext)
+  let {erroremail, setErroremail,errorpass,setErrorpass,loginDelay, setLoginDelay,wrong,setWrong}=useContext(provideContext)
   let [email, setEmail]=useState('')
   let [password, setPassword]=useState('')
 
@@ -12,7 +12,9 @@ function Login({handleData}) {
     e.preventDefault();
     setTimeout(() => {
       setLoginDelay(false)
-      handleData(email,password)
+      if(email && password && password.length>=8){
+        handleData(email,password)
+      }
       setEmail('')
       setPassword('')
     }, 1500);
@@ -26,6 +28,7 @@ function Login({handleData}) {
       setLoginDelay(false)
     }
   }
+  
   return (
     <div className='w-full min-h-screen  pt-16 max-sm:py-6  bg-[#212121]'>
       <div className='w-full h-full flex items-center justify-center'>
@@ -40,10 +43,11 @@ function Login({handleData}) {
             <h1 className='text-sm mb-1'>Email Address</h1>
             <input value={email} onChange={(elem)=>{setEmail(elem.target.value)
               setErroremail(false)
+              setWrong(false)
             }} type="email" placeholder='Enter Your email' className={`w-full border    rounded-lg ${erroremail ? 'border-red-500 text-red-400':'border'}  py-1.5 max-sm:text-sm outline-0 px-3`} />
             {
               erroremail &&(
-                <h1 className='text-red-400'>required:</h1>
+                <h1 className='text-red-400 text-sm'>Email is required.</h1>
               )
             }
           </div>
@@ -51,10 +55,16 @@ function Login({handleData}) {
             <h1 className='text-sm mb-1'>Password</h1>
             <input value={password} onChange={(elem)=>{setPassword(elem.target.value)
               setErrorpass(false)
+              setWrong(false)
             }} type="text" placeholder='Enter Your password' className={`w-full border    rounded-lg ${errorpass ? 'border-red-500 text-red-400':'border'}  py-1.5 max-sm:text-sm outline-0 px-3`} />
             {
               errorpass &&(
-                <h1 className='text-red-400'>required:</h1>
+                <h1 className='text-red-400 text-sm' >Password is required.</h1>
+              )
+            } 
+            {
+              password.length>1 && password.length <8  &&(
+                <h1 className='text-red-400 text-sm' >Password must be at least 8 characters.</h1>
               )
             } 
           <Link to='/forgetpassword' className='text-sm pt-1 hover:underline'>Forget Password ?</Link>
@@ -69,8 +79,16 @@ function Login({handleData}) {
               Login
             </button>)
             } 
+            {
+              wrong &&(
+
+                <div className='text-center text-red-400 pt-2'> 
+              Invalid email or password.
+            </div>
+              )
+            }
           </div>
-          <div className='py-10 max-sm:text-sm'>
+          <div className='py-7 max-sm:text-sm'>
             <h1>Are You New Member ? 
               <Link to='/signin' className='text-blue-400 font-semibold cursor-pointer hover:underline ' >
             Sign Up

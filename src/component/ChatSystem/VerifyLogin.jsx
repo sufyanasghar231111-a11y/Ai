@@ -4,7 +4,7 @@ import Login from '../login&signSystem/Login'
 import Ai from '../ChatSystem/Ai'
 
 function VerifyLogin() {
-     let {userInput,setUserInput,user, setUser}=useContext(provideContext)
+     let {userInput,setUserInput,user, setUser,wrong,setWrong}=useContext(provideContext)
      useEffect(()=>{
       let store =JSON.parse(localStorage.getItem('users')) || []
       setUserInput(store)
@@ -18,6 +18,9 @@ function VerifyLogin() {
       if(fetch){
         localStorage.setItem('logInUser',JSON.stringify(fetch))
         setUser(fetch)
+      }
+      else{
+       setWrong(true)
       }
      }
   return (

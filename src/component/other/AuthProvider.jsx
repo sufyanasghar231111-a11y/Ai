@@ -33,6 +33,7 @@ function AuthProvider({ children }) {
   let [signpass, setSignpass] = useState(false)
   let [signemail, setSignemail] = useState(false)
   let [name, setName] = useState(false)
+  let [wrong,setWrong]=useState(false)
   let [edit,setEdit]=useState({
     editname:user?.name,
     edituser:user?.email
@@ -61,7 +62,7 @@ function AuthProvider({ children }) {
     setSave([...save, newUser])
     setTimeout(() => {
       
-      if (input.name && input.email && input.password) {
+      if (input.name && input.email && input.password && input.password.length>=8) {
         setUser(newUser);
       }
       setDelay(false)
@@ -319,7 +320,7 @@ else if (message.includes("can you help with web development")) {
     })
   }
   return (
-    <provideContext.Provider value={{ userInput, setUserInput, input, setInput, handleForm, handleChange, log, setLog, save, setSave, logOut, setLogOut, handleLogOut, user, setUser, handleChatSubmit, chat, setChat, content, setContent, hide, setHide, typing, setTyping, handleDelete, erroremail, setErroremail, errorpass, setErrorpass, name, setName, signemail, setSignemail, signpass, setSignpass,hideContent, setHideContent,handleEdit,edit,setEdit,handleChangeEdit,delay, setDelay,loginDelay, setLoginDelay }}>
+    <provideContext.Provider value={{ userInput, setUserInput, input, setInput, handleForm, handleChange, log, setLog, save, setSave, logOut, setLogOut, handleLogOut, user, setUser, handleChatSubmit, chat, setChat, content, setContent, hide, setHide, typing, setTyping, handleDelete, erroremail, setErroremail, errorpass, setErrorpass, name, setName, signemail, setSignemail, signpass, setSignpass,hideContent, setHideContent,handleEdit,edit,setEdit,handleChangeEdit,delay, setDelay,loginDelay, setLoginDelay,wrong,setWrong }}>
       {children}
     </provideContext.Provider>
   )
