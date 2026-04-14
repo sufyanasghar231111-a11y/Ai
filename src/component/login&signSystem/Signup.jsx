@@ -6,6 +6,7 @@ import { RiLoader4Line } from '@remixicon/react'
 function Signup() {
  let {input,handleForm,handleChange,user,signemail,signpass,name,delay}=useContext(provideContext)
 
+
  useEffect(()=>{
     localStorage.setItem('logInUser', JSON.stringify(user))
  },[user])
