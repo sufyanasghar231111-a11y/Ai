@@ -8,7 +8,6 @@ function Login({handleData}) {
   let [email, setEmail]=useState('')
   let [password, setPassword]=useState('')
  
-
   function handleLoginForm(e){
     e.preventDefault();
     setTimeout(() => {

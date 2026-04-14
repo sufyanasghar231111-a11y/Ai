@@ -44,7 +44,7 @@ function ForgetPassword() {
                 ):''
             }
             {
-                success ? (
+              success ? (
 
                     <p className='text-sm pt-1 pb-3 text-green-500'>If this email exists, we’ve sent a reset link. Please check your inbox.</p>
                 ):''
