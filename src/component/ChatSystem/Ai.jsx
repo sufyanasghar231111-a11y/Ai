@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import Logout from '../ChatSystem/Logout'
 import { provideContext } from '../other/AuthProvider'
 import ChatUi from './ChatUi'
 import { RiLoader2Fill, RiLoader4Line } from '@remixicon/react'
 
 function Ai({user}) {
-  let {logOut, setLogOut,handleLogOut,handleDelete,hideContent, setHideContent,handleEdit,edit,setEdit,handleChangeEdit,delay, setDelay}=useContext(provideContext)
+  let {logOut, setLogOut,handleLogOut,handleDelete,hideContent, setHideContent,handleEdit,edit,handleChangeEdit,delay}=useContext(provideContext)
   
   
   return (
@@ -29,7 +29,7 @@ function Ai({user}) {
         }
 
        
-        <button onClick={()=>{setLogOut(false)}} className='w-full cursor-pointer  bg-white py-2 max-sm:mb-1 rounded-full mb-3 max-sm:py-1.5 text-neutral-700 font-semibold'>Cancel</button>
+        <button disabled={delay} onClick={()=>{setLogOut(false)}} className='w-full cursor-pointer  bg-white py-2 max-sm:mb-1 rounded-full mb-3 max-sm:py-1.5 text-neutral-700 font-semibold'>Cancel</button>
        </div>
         </div>
           </>

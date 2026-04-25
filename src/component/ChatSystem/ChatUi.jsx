@@ -1,5 +1,5 @@
 import { RiArrowRightLongLine, RiLink, RiMailLine, RiStackOverflowLine, RiUserLine } from '@remixicon/react'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { provideContext } from '../other/AuthProvider';
 
 function ChatUi({ user }) {
@@ -18,7 +18,7 @@ function ChatUi({ user }) {
       icon: <RiStackOverflowLine className='w-4 h-4' />
     }
   ]
-  let { hide, content, handleChatSubmit, chat, setChat, typing, handleDelete,setContent } = useContext(provideContext)
+  let { hide, content, handleChatSubmit, chat, setChat, typing, handleDelete } = useContext(provideContext)
   let bottom = useRef(null)
   useEffect(() => {
     bottom.current?.scrollIntoView({ behavior: 'smooth' })

@@ -1,5 +1,5 @@
 import React, { Children, createContext, useEffect, useState } from 'react'
-import { getLocal, setLocal, users } from './LoginData'
+import { getLocal, setLocal } from './LoginData'
 
 export const provideContext = createContext()
 function AuthProvider({ children }) {
@@ -286,7 +286,6 @@ else if (message.includes("can you help with web development")) {
       }, 1500);
       setTimeout(()=>{
         setDelay(false)
-
       },1500)
       setDelay(true)
     }

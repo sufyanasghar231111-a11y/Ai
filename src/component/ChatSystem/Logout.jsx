@@ -4,7 +4,7 @@ import { RiAddLargeFill, RiAddLargeLine, RiLoader4Line, RiUserLine } from "@remi
 import { Link } from 'react-router-dom';
 
 function Logout({user}) {
-    let {logOut, setLogOut,hideContent, setHideContent,handleLogOut, handleDelete,delay, setDelay}=useContext(provideContext)
+    let { setLogOut, setHideContent,handleLogOut, handleDelete,delay}=useContext(provideContext)
     let [hide, setHide]=useState(false)
     
   return (

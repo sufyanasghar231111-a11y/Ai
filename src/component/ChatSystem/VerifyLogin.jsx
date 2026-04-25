@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { provideContext } from '../other/AuthProvider'
 import Login from '../login&signSystem/Login'
 import Ai from '../ChatSystem/Ai'
 
 function VerifyLogin() {
-     let {userInput,setUserInput,user, setUser,wrong,setWrong}=useContext(provideContext)
+     let {userInput,setUserInput,user, setUser,setWrong}=useContext(provideContext)
      useEffect(()=>{
       let store =JSON.parse(localStorage.getItem('users')) || []
       setUserInput(store)

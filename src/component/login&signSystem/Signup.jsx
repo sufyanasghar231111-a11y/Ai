@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Ai from '../ChatSystem/Ai'
 import { provideContext } from '../other/AuthProvider'
 import { RiLoader4Line } from '@remixicon/react'
